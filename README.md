@@ -201,7 +201,8 @@ Iterative policy evaluation was implemented successfully using the Gymnasium Fro
 ---
 ## Inference
 ### for gamma 0.80
-<img width="489" height="281" alt="image" src="https://github.com/user-attachments/assets/76dee052-ab7d-4e6d-bb54-c64dc7dd4bbb" />
+<img width="489" height="281" alt="image" src="https://github.com/user-attachments/assets/76dee052-ab7d-4e6d-bb54-c64dc7dd4bbb" /></br>
+
 ### for gamma 0.99
 
 <img width="565" height="278" alt="image" src="https://github.com/user-attachments/assets/6c6e8a94-3228-46b3-9a5d-6f6795cd4011" />
