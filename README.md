@@ -194,9 +194,7 @@ env.close()
 
 ---
 
-## Result
 
-Iterative policy evaluation was implemented successfully using the Gymnasium FrozenLake environment. The state-value function for the fixed random policy was estimated using the Bellman expectation equation.
 
 ---
 ## Inference
@@ -206,6 +204,10 @@ Iterative policy evaluation was implemented successfully using the Gymnasium Fro
 ### for gamma 0.99
 
 <img width="565" height="278" alt="image" src="https://github.com/user-attachments/assets/6c6e8a94-3228-46b3-9a5d-6f6795cd4011" />
+
+## Result
+
+Iterative policy evaluation was implemented successfully using the Gymnasium FrozenLake environment. The state-value function for the fixed random policy was estimated using the Bellman expectation equation.
 
 
 
