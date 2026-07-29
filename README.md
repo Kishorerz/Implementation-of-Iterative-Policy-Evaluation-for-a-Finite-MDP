@@ -1,4 +1,4 @@
-# Implementation-of-Iterative-Policy-Evaluation-for-a-Finite-MDP
+<img width="565" height="278" alt="image" src="https://github.com/user-attachments/assets/5579f8d1-b9e2-47b1-9f83-3e0d2145ac57" /># Implementation-of-Iterative-Policy-Evaluation-for-a-Finite-MDP
 ## Aim
 
 To implement iterative policy evaluation using Gymnasium and estimate the state-value function $V^\pi(s)$ for a fixed random policy.
@@ -99,18 +99,91 @@ Where:
 ## Program
 
 ```python
+import gymnasium as gym
+import numpy as np
 
+# Create FrozenLake environment
+env = gym.make("FrozenLake-v1", map_name="4x4", is_slippery=True)
+
+# Access the unwrapped environment to use the transition model
+env = env.unwrapped
+
+# Number of states and actions
+n_states = env.observation_space.n
+n_actions = env.action_space.n
+
+# Random policy: each action has equal probability
+policy = np.ones((n_states, n_actions)) / n_actions
+
+# Initialize value function
+V = np.zeros(n_states)
 
 # -------------------------------------------------
 # Policy Evaluation Function
 # -------------------------------------------------
 
+def policy_evaluation(env, policy, gamma=0.99, theta=1e-8):
+    """
+    Performs iterative policy evaluation using the Bellman expectation equation.
 
-# -------------------------------------------------
-# Display Output
-# -------------------------------------------------
+    Parameters:
+        env    : Gymnasium FrozenLake environment
+        policy : Fixed policy to be evaluated
+        gamma  : Discount factor
+        theta  : Convergence threshold
 
-# Change the parameters and observe the results
+    Returns:
+        V         : Estimated state-value function
+        iteration : Number of iterations used for convergence
+    """
+
+    # Initialize value function
+    V = np.zeros(env.observation_space.n)
+    iteration = 0
+
+    while True:
+        delta = 0
+
+        # Update value for each state
+        for s in range(env.observation_space.n):
+            v = V[s]
+            new_v = 0
+
+            # Bellman Expectation Equation
+            for a, action_prob in enumerate(policy[s]):
+                for prob, next_state, reward, done in env.unwrapped.P[s][a]:
+                    new_v += action_prob * prob * (
+                        reward + gamma * V[next_state] * (not done)
+                    )
+
+            V[s] = new_v
+            delta = max(delta, abs(v - V[s]))
+
+        iteration += 1
+
+        # Check convergence
+        if delta < theta:
+            break
+
+    return V, iteration
+
+
+# Run policy evaluation
+V, iterations = policy_evaluation(env, policy, gamma, theta)
+print ("Name: Kishor kumar B")
+print ("Register Number: 212223240072")
+print("Number of iterations:", iterations)
+print("\nState-Value Function:")
+print(V)
+
+print("Name: Kishor kumar B")
+print("Register Number: 212223240072")
+print("\nState-Value Function as 4x4 Grid:")
+print(np.round(V.reshape(4, 4), 4))
+
+env.close()
+
+
 
 ```
 
@@ -118,15 +191,8 @@ Where:
 
 ## Output
 
-```text
+<img width="565" height="278" alt="image" src="https://github.com/user-attachments/assets/6c6e8a94-3228-46b3-9a5d-6f6795cd4011" />
 
-Number of Iterations: 
-
-State-Value Function as 4x4 Grid:
-
-
-
-```
 ---
 
 ## Result
@@ -135,13 +201,7 @@ Iterative policy evaluation was implemented successfully using the Gymnasium Fro
 
 ---
 
-## Inference
 
-```text
-
-
-
-```
 
 
 
